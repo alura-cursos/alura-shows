@@ -1,0 +1,48 @@
+@CHARSET "UTF-8";
+
+.center_div {
+	margin: 0 auto;
+}
+
+.error {
+	font-weight: bold;
+	color: red;
+}
+
+.formulario-cadastro-usuario{
+	margin-top: 100px;
+}
+
+footer {
+	background-color: #5a5a5a;
+	position:fixed;
+	bottom:0;
+	width:100%;
+	padding-top:10px;
+}
+
+.table td{
+	vertical-align:middle !important
+}
+
+#busca{
+	position: absolute;
+    left: 529px;
+    width: 50px;
+    top: -1px;
+    height: 36px;
+}
+
+#formularioLogin{
+    height: 280px;
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 40%;
+    padding:20px;
+    border-radius:25px;
+    background-color: #ddd
+}
