@@ -39,7 +39,7 @@
 			</ul>
 		</div>
 		<div class="col-sm-6 col-md-10 main">
-			<h1 class="page-header">Painél administrativo</h1>
+			<h1 class="page-header" style="margin: 0 0 20px !important">Painél administrativo</h1>
 
 			<div class="row placeholders">
 				<div class="col-xs-6 col-sm-3 placeholder">
