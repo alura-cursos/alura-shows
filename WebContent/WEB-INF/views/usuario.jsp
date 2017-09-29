@@ -1,10 +1,9 @@
 <%@include file="/WEB-INF/views/cabecalho.jsp"%>
-<div class="container">
-	<div class="row" style="padding-top: 150px">
+<div class="container" style="margin-top: 10%">
+	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
 			<div class="panel panel-login">
 				<div class="panel-heading">
-					<p>${mensagem}</p>
 					<div class="row">
 						<div class="col-xs-6">
 							<a href="#" class="active" id="login-form-link">Login</a>
@@ -12,10 +11,11 @@
 						<div class="col-xs-6">
 							<a href="#" id="register-form-link">Registrar</a>
 						</div>
-					</div>
+					</div>					
 					<hr>
 				</div>
 				<div class="panel-body">
+				<p class="pull-left" style="color:red; font-weight: bold">${mensagem}</p>
 					<div class="row">
 						<div class="col-lg-12">
 							<form id="login-form" action="${s:mvcUrl('UC#login').build()}"
@@ -60,7 +60,7 @@
 								</div>
 
 								<div class="form-group">
-									<div class="row">
+									<div class="row" style="margin-top: 5%">
 										<div class="col-sm-6 col-sm-offset-3">
 											<input type="submit" name="register-submit"
 												id="register-submit" tabindex="4"

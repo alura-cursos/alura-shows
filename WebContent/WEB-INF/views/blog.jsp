@@ -1,5 +1,6 @@
 <%@include file="/WEB-INF/views/cabecalho.jsp"%>
 <div class="container formulario-cadastro-usuario">
+	<h1>Blog</h1>
 	<form:form action="${s:mvcUrl('BC#enviaMensagem').build()}"
 		commandName="blog" method="post">
 		<div class="form-group">
@@ -12,10 +13,11 @@
 				placeholder="Mensagem para o blog" rows="8"></textarea>
 		</div>
 
-		<button type="submit" class="btn btn-success">Enviar</button>
+		<button type="submit" class="btn btn-success pull-right">Enviar</button>
 	</form:form>
 
 	<c:if test="${not empty lista}">
+		<h2 style="margin-top:10%">Postagens</h2>
 		<table class="table">
 			<thead>
 				<tr>

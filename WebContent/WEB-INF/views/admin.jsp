@@ -1,5 +1,5 @@
 <%@ include file="/WEB-INF/views/cabecalho.jsp"%>
-<div class="modal-dialog" style="padding-top: 100px">
+<div class="modal-dialog" style="margin-top: 10%">
 	<div class="modal-content">
 		<div class="modal-header">
 			<h3 class="text-center">Área administrativa!</h3>
