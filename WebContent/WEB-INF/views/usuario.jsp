@@ -4,6 +4,7 @@
 		<div class="col-md-6 col-md-offset-3">
 			<div class="panel panel-login">
 				<div class="panel-heading">
+					<p>${mensagem}</p>
 					<div class="row">
 						<div class="col-xs-6">
 							<a href="#" class="active" id="login-form-link">Login</a>
@@ -17,7 +18,7 @@
 				<div class="panel-body">
 					<div class="row">
 						<div class="col-lg-12">
-							<form id="login-form" action="https://phpoll.com/login/process"
+							<form id="login-form" action="${s:mvcUrl('UC#login').build()}"
 								method="post" role="form" style="display: block;">
 								<div class="form-group">
 									<input type="text" name="email" id="email" tabindex="1"

@@ -38,6 +38,18 @@ public class UsuarioController {
 		return "redirect:/usuario";
 
 	}
+	
+	@RequestMapping("/login")
+	public String login(@ModelAttribute("usuario") Usuario usuario, RedirectAttributes redirect){
+		Usuario usuarioRetornado = dao.procuraUsuario(usuario);
+		if(usuarioRetornado==null){
+			redirect.addFlashAttribute("mensagem",
+					"Usuário não encontrado!");
+			return "redirect:/usuario";
+		}else{
+			return "usuarioLogado";
+		}
+	}
 
 	private void chamaLogicaParaTratarImagem(Usuario usuario,
 			HttpServletRequest request) {

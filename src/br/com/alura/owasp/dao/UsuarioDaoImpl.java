@@ -57,7 +57,7 @@ public class UsuarioDaoImpl implements UsuarioDao{
 				return usuarioRetorno;
 			}
 		} catch (SQLException e) {
-			return null;
+			throw new RuntimeException(e);
 		}
 	}
 }
