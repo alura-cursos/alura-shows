@@ -1,7 +1,7 @@
 <%@include file="/WEB-INF/views/cabecalho.jsp"%>
 <div class="container">
 	<div class="row" style="padding-top: 150px">
-		<div class="col-md-6 col-md-offset-3">
+		<div class="col-md-8 col-md-offset-2">
 			<div class="panel panel-login">
 				<div class="panel-heading">
 					<p>${mensagem}</p>

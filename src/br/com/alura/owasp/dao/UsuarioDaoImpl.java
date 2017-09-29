@@ -49,6 +49,7 @@ public class UsuarioDaoImpl implements UsuarioDao{
 				usuarioRetorno.setEmail(results.getString("email"));
 				usuarioRetorno.setSenha(results.getString("senha"));
 				usuarioRetorno.setNomeImagem(results.getString("nomeImagem"));
+				usuarioRetorno.setNome(results.getString("nome"));
 			}
 			if (usuarioRetorno.getEmail() == null
 					&& usuarioRetorno.getSenha() == null) {

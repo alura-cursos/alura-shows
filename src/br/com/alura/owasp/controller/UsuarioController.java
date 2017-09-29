@@ -30,23 +30,23 @@ public class UsuarioController {
 
 	@RequestMapping("/registrar")
 	public String registrar(@ModelAttribute("usuario") Usuario usuario,
-			RedirectAttributes redirect, HttpServletRequest request) {
+			RedirectAttributes redirect, HttpServletRequest request, Model model) {
 		chamaLogicaParaTratarImagem(usuario, request);
 		dao.salva(usuario);
-		redirect.addFlashAttribute("mensagem",
-				"Usuário cadastrado com sucesso!");
-		return "redirect:/usuario";
+		model.addAttribute("usuario", usuario);
+		return "usuarioLogado";
 
 	}
 	
 	@RequestMapping("/login")
-	public String login(@ModelAttribute("usuario") Usuario usuario, RedirectAttributes redirect){
+	public String login(@ModelAttribute("usuario") Usuario usuario, RedirectAttributes redirect, Model model){
 		Usuario usuarioRetornado = dao.procuraUsuario(usuario);
 		if(usuarioRetornado==null){
 			redirect.addFlashAttribute("mensagem",
 					"Usuário não encontrado!");
 			return "redirect:/usuario";
 		}else{
+			model.addAttribute("usuario", usuarioRetornado);
 			return "usuarioLogado";
 		}
 	}
