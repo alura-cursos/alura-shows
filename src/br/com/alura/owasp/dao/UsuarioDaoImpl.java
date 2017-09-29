@@ -7,6 +7,7 @@ import java.sql.Statement;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +16,6 @@ import br.com.alura.owasp.model.Usuario;
 import br.com.alura.owasp.util.ConnectionFactory;
 
 @Repository
-@Transactional
 public class UsuarioDaoImpl implements UsuarioDao{
 
 	//Será usado na primeira aula, depois mudaremos para o EntityManager
@@ -59,6 +59,24 @@ public class UsuarioDaoImpl implements UsuarioDao{
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
+		}
+	}
+	
+	@Override
+	public boolean verificaSeUsuarioEhAdmin(Usuario usuario) {
+		TypedQuery<Usuario> query = manager
+				.createQuery(
+						"select u from Usuario u where u.email =:email and u.senha =:senha",
+						Usuario.class);
+		query.setParameter("email", usuario.getEmail());
+		query.setParameter("senha", usuario.getSenha());
+		Usuario retornoUsuario = query.getResultList()
+				.stream().findFirst().orElse(null);
+		if (retornoUsuario != null
+				&& retornoUsuario.getRole().equals("ROLE_ADMIN")) {
+			return true;
+		} else {
+			return false;
 		}
 	}
 }
