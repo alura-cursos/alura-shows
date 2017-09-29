@@ -13,5 +13,6 @@
 <script src="<c:url value="/resources/js/jquery-ui.js"/>"></script>
 <script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
 <script src="<c:url value="/resources/js/config.js"/>"></script>
+<script src="<c:url value="/resources/js/typed.js"/>"></script>
 </body>
 </html>

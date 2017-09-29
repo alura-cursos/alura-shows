@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/cabecalho.jsp"%> 
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
+	<h1 class="alura-show element"></h1>
 	<ol class="carousel-indicators">
 		<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
 		<li data-target="#myCarousel" data-slide-to="1"></li>
