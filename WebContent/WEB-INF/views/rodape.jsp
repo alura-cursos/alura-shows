@@ -14,5 +14,6 @@
 <script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
 <script src="<c:url value="/resources/js/bootstrap-datepicker.js"/>"></script>
 <script src="<c:url value="/resources/js/datepicker-pt.js"/>"></script>
+<script src="<c:url value="/resources/js/config.js"/>"></script>
 </body>
 </html>

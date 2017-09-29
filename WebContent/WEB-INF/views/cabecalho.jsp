@@ -31,7 +31,7 @@
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
 						<li class="active"><a href="<c:url value="/"/>" /><strong>Home</strong></a></li>
-						<li><a href='<c:url value="/loginUsuario"/>' /><strong>Login</strong></a></li>
+						<li><a href='<c:url value="/usuario"/>' /><strong>Usuário</strong></a></li>
 						<li><a href='<c:url value="/cadastro"/>' /><strong>Cadastro</strong></a></li>
 						<li><a href='<c:url value="/blog"/>' /><strong>Blog</strong></a></li>
 					</ul>
