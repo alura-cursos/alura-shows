@@ -32,13 +32,9 @@ public class BlogController {
 
 
 	@RequestMapping(value = "/enviaMensagem", method = RequestMethod.POST)
-	public String enviaMensagem(@Valid
-			@ModelAttribute(value = "blog") BlogPost blog, BindingResult result,
+	public String enviaMensagem(@ModelAttribute(value = "blog") BlogPost blog,
 			RedirectAttributes redirect, Model model) {
 		chamaPostsDoBanco(model);
-		if(result.hasErrors()){
-			return "blog";
-		}
 		dao.salvaBlogPost(blog);
 		return "redirect:/blog";
 	}

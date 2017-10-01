@@ -20,13 +20,14 @@
 						<div class="col-lg-12">
 							<form id="login-form" action="${s:mvcUrl('UC#login').build()}"
 								method="get" role="form" style="display: block;">
+								<form:errors path="email" style="color:red;font-weight:bold"/>
 								<div class="form-group">
 									<input type="text" name="email" id="email" tabindex="1"
-										class="form-control" placeholder="E-mail" value="">
+										class="form-control" placeholder="E-mail" value="" required="required">
 								</div>
 								<div class="form-group">
 									<input type="password" name="senha" id="senha" tabindex="2"
-										class="form-control" placeholder="Senha">
+										class="form-control" placeholder="Senha" required="required">
 								</div>
 								<div class="form-group">
 									<div class="row">
@@ -44,19 +45,19 @@
 								enctype="multipart/form-data">
 								<div class="form-group">
 									<input type="text" name="nome" id="nome" tabindex="1"
-										class="form-control" placeholder="Nome">
+										class="form-control" placeholder="Nome" required="required">
 								</div>
 								<div class="form-group">
 									<input type="email" name="email" id="email" tabindex="1"
-										class="form-control" placeholder="E-mail">
+										class="form-control" placeholder="E-mail" required="required">
 								</div>
 								<div class="form-group">
 									<input type="password" name="senha" id="senha" tabindex="2"
-										class="form-control" placeholder="Senha">
+										class="form-control" placeholder="Senha" required="required">
 								</div>
 								<div>
 									<label for="imagem">Imagem perfil: </label> <input type="file"
-										name="imagem" multiple="multiple" />
+										name="imagem" multiple="multiple" required="required" />
 								</div>
 
 								<div class="form-group">

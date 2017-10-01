@@ -10,12 +10,12 @@
 			<div class="modal-body">
 				<div class="form-group">
 					<input type="text" class="form-control input-lg"
-						placeholder="E-mail" name="email" />
+						placeholder="E-mail" name="email" required="required" />
 				</div>
 
 				<div class="form-group">
 					<input type="password" class="form-control input-lg"
-						placeholder="Senha" name="senha" />
+						placeholder="Senha" name="senha" required="required"/>
 				</div>
 
 				<div class="form-group">
