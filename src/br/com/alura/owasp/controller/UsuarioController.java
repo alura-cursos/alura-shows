@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,30 +30,43 @@ public class UsuarioController {
 		model.addAttribute("usuario", usuario);
 		return "usuario";
 	}
+	
+	@RequestMapping("/usuarioLogado")
+	public String usuarioLogado(){
+		return "usuarioLogado";
+	}
 
 	@RequestMapping("/registrar")
 	public String registrar(@ModelAttribute("usuario") Usuario usuario,
-			RedirectAttributes redirect, HttpServletRequest request, Model model) {
+			RedirectAttributes redirect, HttpServletRequest request, Model model, HttpSession session) {
 		chamaLogicaParaTratarImagem(usuario, request);
 		dao.salva(usuario);
+		session.setAttribute("usuario", usuario);
 		model.addAttribute("usuario", usuario);
 		return "usuarioLogado";
-
 	}
 	
 	@RequestMapping("/login")
-	public String login(@ModelAttribute("usuario") Usuario usuario, RedirectAttributes redirect, Model model){
+	public String login(@ModelAttribute("usuario") Usuario usuario, RedirectAttributes redirect, Model model, HttpSession session){
 		Usuario usuarioRetornado = dao.procuraUsuario(usuario);
 		if(usuarioRetornado==null){
 			redirect.addFlashAttribute("mensagem",
-					"Usu·rio n„o encontrado!");
+					"Usu√°rio n√£o encontrado!");
 			return "redirect:/usuario";
 		}else{
+			session.setAttribute("usuario", usuarioRetornado);
 			model.addAttribute("usuario", usuarioRetornado);
 			return "usuarioLogado";
 		}
 	}
-
+	
+	@RequestMapping("/logout")
+	public String logout(HttpSession session){
+		session.removeAttribute("usuario");
+		return "usuario";
+	}
+	
+	
 	private void chamaLogicaParaTratarImagem(Usuario usuario,
 			HttpServletRequest request) {
 		usuario.setNomeImagem(usuario.getImagem().getOriginalFilename());

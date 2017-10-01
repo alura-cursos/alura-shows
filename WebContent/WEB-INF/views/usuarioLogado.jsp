@@ -14,6 +14,9 @@
 			<hr>
 		</div>
 
+	<form action="${s:mvcUrl('UC#logout').build()}">
+		<button type="submit" class="btn btn-success pull-right" >Logout</button>
+	</form>
 
 	</div>
 </div>

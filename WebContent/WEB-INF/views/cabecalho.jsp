@@ -31,7 +31,12 @@
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
 						<li class="active"><a href="<c:url value="/"/>" /><strong>Home</strong></a></li>
-						<li><a href='<c:url value="/usuario"/>' /><strong>Usuário</strong></a></li>
+						<c:if test="${empty usuario.email}">
+							<li><a href='<c:url value="/usuario"/>' /><strong>Usuário</strong></a></li>
+						</c:if>
+						<c:if test="${not empty usuario.email}">
+							<li><a href='<c:url value="/usuarioLogado"/>' /><strong>Perfil</strong></a></li>
+						</c:if>
 						<li><a href='<c:url value="/blog"/>' /><strong>Blog</strong></a></li>
 					</ul>
 				</div>
