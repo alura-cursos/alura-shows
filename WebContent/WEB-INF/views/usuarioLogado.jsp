@@ -15,7 +15,7 @@
 		</div>
 
 	<form action="${s:mvcUrl('UC#logout').build()}">
-		<button type="submit" class="btn btn-success pull-right" >Logout</button>
+		<button type="submit" class="btn btn-primary pull-left" >Logout</button>
 	</form>
 
 	</div>

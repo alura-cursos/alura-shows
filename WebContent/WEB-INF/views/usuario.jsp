@@ -19,7 +19,7 @@
 					<div class="row">
 						<div class="col-lg-12">
 							<form id="login-form" action="${s:mvcUrl('UC#login').build()}"
-								method="post" role="form" style="display: block;">
+								method="get" role="form" style="display: block;">
 								<div class="form-group">
 									<input type="text" name="email" id="email" tabindex="1"
 										class="form-control" placeholder="E-mail" value="">

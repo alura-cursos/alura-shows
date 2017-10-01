@@ -4,11 +4,14 @@
 	<form:form action="${s:mvcUrl('BC#enviaMensagem').build()}"
 		commandName="blog" method="post">
 		<div class="form-group">
-			<label for="titulo">Título:</label> <input type="text"
+			<label for="titulo">Título:</label> 
+			<form:errors path="titulo" style="color:red;font-weight:bold"/>
+			<input type="text"
 				class="form-control" id="titulo" name="titulo" placeholder="Título">
 		</div>
 		<div class="form-group">
 			<label for="textarea">Mensagem:</label>
+			<form:errors path="mensagem" style="color:red;font-weight:bold" />
 			<textarea class="form-control" id="textarea" name="mensagem"
 				placeholder="Mensagem para o blog" rows="8"></textarea>
 		</div>
@@ -17,7 +20,7 @@
 	</form:form>
 
 	<c:if test="${not empty lista}">
-		<h2 style="margin-top:10%">Postagens</h2>
+		<h2 style="margin-top: 10%">Postagens</h2>
 		<table class="table">
 			<thead>
 				<tr>

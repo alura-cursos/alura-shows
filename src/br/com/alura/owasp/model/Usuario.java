@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -19,11 +20,15 @@ public class Usuario implements Serializable {
 
 	@Id
 	private String email;
+	@NotNull (message="Por favor insira a senha!")
 	private String senha;
+	@NotNull (message="Por favor insira seu nome!")
 	private String nome;
 	private String role = "ROLE_USER";
 	@Transient
+	@NotNull (message="Por favor, coloque uma imagem!")
 	private MultipartFile imagem;
+	@NotNull
 	private String nomeImagem;
 
 	public String getEmail() {
