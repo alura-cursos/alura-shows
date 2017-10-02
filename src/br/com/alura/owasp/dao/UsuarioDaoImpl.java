@@ -10,7 +10,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import br.com.alura.owasp.model.Usuario;
 import br.com.alura.owasp.util.ConnectionFactory;
@@ -18,10 +17,10 @@ import br.com.alura.owasp.util.ConnectionFactory;
 @Repository
 public class UsuarioDaoImpl implements UsuarioDao{
 
-	//Será usado na primeira aula, depois mudaremos para o EntityManager
+	//Serï¿½ usado na primeira aula, depois mudaremos para o EntityManager
 	Connection connection = new ConnectionFactory().getConnection();
 
-	//Será usado mais adiante
+	//Serï¿½ usado mais adiante
 	@PersistenceContext
 	private EntityManager manager;
 
