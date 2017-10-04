@@ -30,7 +30,7 @@ public class AdminController {
 		if(verificaSeUsuarioEhAdmin){
 			return "adminLogado";
 		}else{
-			redirect.addFlashAttribute("mensagem", "Usuário não é admin!");
+			redirect.addFlashAttribute("mensagem", "Permissão negada!");
 			return "redirect:/admin";
 		}
 	}

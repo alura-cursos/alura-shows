@@ -11,23 +11,27 @@ import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
 
+import br.com.alura.owasp.model.Role;
 import br.com.alura.owasp.model.Usuario;
 import br.com.alura.owasp.util.ConnectionFactory;
 
 @Repository
-public class UsuarioDaoImpl implements UsuarioDao{
+public class UsuarioDaoImpl implements UsuarioDao {
 
-	//Ser� usado na primeira aula, depois mudaremos para o EntityManager
+	// Será usado na primeira aula, depois mudaremos para o EntityManager
 	Connection connection = new ConnectionFactory().getConnection();
 
-	//Ser� usado mais adiante
+	// Será usado depois da primeira aula
 	@PersistenceContext
 	private EntityManager manager;
 
 	public void salva(Usuario usuario) {
-		String query = "insert into usuarios (email,senha,nome,role,nomeImagem) values ('"
-				+ usuario.getEmail() + "','" + usuario.getSenha() + "','"+usuario.getNome()+"','"
-				+ usuario.getRole() + "','"+usuario.getNomeImagem()+"');";
+		String query = "insert into USUARIO (EMAIL,senha,nome,nomeImagem) values ('"
+				+ usuario.getEmail()
+				+ "','"
+				+ usuario.getSenha()
+				+ "','"
+				+ usuario.getNome() + "','" + usuario.getNomeImagem() + "');";
 		try {
 			Statement statement = connection.createStatement();
 			statement.executeUpdate(query);
@@ -37,7 +41,7 @@ public class UsuarioDaoImpl implements UsuarioDao{
 	}
 
 	public Usuario procuraUsuario(Usuario usuario) {
-		String query = "SELECT * FROM usuarios WHERE email=" + "'"
+		String query = "SELECT * FROM USUARIO WHERE email=" + "'"
 				+ usuario.getEmail() + "'" + " and senha=" + "'"
 				+ usuario.getSenha() + "';";
 		try {
@@ -60,7 +64,7 @@ public class UsuarioDaoImpl implements UsuarioDao{
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 	@Override
 	public boolean verificaSeUsuarioEhAdmin(Usuario usuario) {
 		TypedQuery<Usuario> query = manager
@@ -69,11 +73,15 @@ public class UsuarioDaoImpl implements UsuarioDao{
 						Usuario.class);
 		query.setParameter("email", usuario.getEmail());
 		query.setParameter("senha", usuario.getSenha());
-		Usuario retornoUsuario = query.getResultList()
-				.stream().findFirst().orElse(null);
-		if (retornoUsuario != null
-				&& retornoUsuario.getRole().equals("ROLE_ADMIN")) {
-			return true;
+		Usuario retornoUsuario = query.getResultList().stream().findFirst()
+				.orElse(null);
+		if (retornoUsuario != null) {
+			for (Role role : retornoUsuario.getRoles()) {
+				if (role.getName().equals("ROLE_ADMIN")) {
+					return true;
+				}
+			}
+			return false;
 		} else {
 			return false;
 		}

@@ -1,35 +1,37 @@
 package br.com.alura.owasp.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.web.multipart.MultipartFile;
 
 @Entity
-@Table(name="usuarios")
+@Table(name = "USUARIO")
 public class Usuario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
 
 	@Id
 	private String email;
-	@NotEmpty (message="Por favor insira a senha!")
 	private String senha;
-	@NotEmpty (message="Por favor insira seu nome!")
 	private String nome;
-	private String role = "ROLE_USER";
 	@Transient
 	private MultipartFile imagem;
-	@NotEmpty
 	private String nomeImagem;
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "USUARIO_ROLE", joinColumns = { @JoinColumn(name = "EMAIL") }, inverseJoinColumns = { @JoinColumn(name = "NAME") })
+	private List<Role> roles= new ArrayList<>();
 
 	public String getEmail() {
 		return email;
@@ -43,6 +45,14 @@ public class Usuario implements Serializable {
 		return senha;
 	}
 
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
+
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
@@ -53,14 +63,6 @@ public class Usuario implements Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
 	}
 
 	public MultipartFile getImagem() {
@@ -78,5 +80,5 @@ public class Usuario implements Serializable {
 	public void setNomeImagem(String nomeImagem) {
 		this.nomeImagem = nomeImagem;
 	}
-
+ 
 }

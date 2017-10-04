@@ -13,9 +13,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.alura.owasp.dao.UsuarioDao;
+import br.com.alura.owasp.model.Role;
 import br.com.alura.owasp.model.Usuario;
 
 @Controller
@@ -37,14 +39,15 @@ public class UsuarioController {
 		return "usuarioLogado";
 	}
 
-	@RequestMapping("/registrar")
+	@RequestMapping(value = "/registrar", method = RequestMethod.POST)
 	public String registrar(@ModelAttribute("usuario") Usuario usuario,
 			BindingResult result, RedirectAttributes redirect,
 			HttpServletRequest request, Model model, HttpSession session) {
 		chamaLogicaParaTratarImagem(usuario, request);
+		usuario.getRoles().add(new Role("ROLE_USER"));
 		dao.salva(usuario);
-		session.setAttribute("usuario", usuario);
 		model.addAttribute("usuario", usuario);
+		session.setAttribute("usuario", usuario);
 		return "usuarioLogado";
 	}
 
@@ -52,12 +55,12 @@ public class UsuarioController {
 	public String login(@ModelAttribute("usuario") Usuario usuario,
 			RedirectAttributes redirect, Model model, HttpSession session) {
 		Usuario usuarioRetornado = dao.procuraUsuario(usuario);
+		model.addAttribute("usuario", usuarioRetornado);
 		if (usuarioRetornado == null) {
 			redirect.addFlashAttribute("mensagem", "Usuário não encontrado!");
 			return "redirect:/usuario";
 		} else {
 			session.setAttribute("usuario", usuarioRetornado);
-			model.addAttribute("usuario", usuarioRetornado);
 			return "usuarioLogado";
 		}
 	}
@@ -71,10 +74,10 @@ public class UsuarioController {
 	private void chamaLogicaParaTratarImagem(Usuario usuario,
 			HttpServletRequest request) {
 		usuario.setNomeImagem(usuario.getImagem().getOriginalFilename());
-		File imageFile = new File(request.getServletContext().getRealPath(
-				"/image"), usuario.getNomeImagem());
+		File arquivoDeImagem = new File(request.getServletContext()
+				.getRealPath("/image"), usuario.getNomeImagem());
 		try {
-			usuario.getImagem().transferTo(imageFile);
+			usuario.getImagem().transferTo(arquivoDeImagem);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
