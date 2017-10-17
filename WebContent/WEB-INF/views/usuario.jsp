@@ -28,7 +28,7 @@
 									<input type="password" name="senha" id="senha" tabindex="2"
 										class="form-control" placeholder="Senha" required="required">
 								</div>
-								<div class="form-group">
+								<div class="form-group" style="margin-top: 3%">
 									<div class="row">
 										<div class="col-sm-6 col-sm-offset-3">
 											<input type="submit" name="login-submit" id="login-submit"
