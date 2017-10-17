@@ -11,35 +11,36 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.com.alura.owasp.dao.BlogDao;
-import br.com.alura.owasp.model.BlogPost;
+import br.com.alura.owasp.dao.DepoimentoDao;
+import br.com.alura.owasp.model.Depoimento;
 
 @Controller
 @Transactional
-public class BlogController {
+public class DepoimentoController {
 
 	@Autowired
-	private BlogDao dao;
+	private DepoimentoDao dao;
 
-	@RequestMapping("/blog")
-	public String blog(Model model) {
+	@RequestMapping("/depoimento")
+	public String depoimento(Model model) {
 		chamaPostsDoBanco(model);
-		return "blog";
+		return "depoimento";
 	}
-
 
 	@RequestMapping(value = "/enviaMensagem", method = RequestMethod.POST)
-	public String enviaMensagem(@ModelAttribute(value = "blog") BlogPost blog,
+	public String enviaMensagem(
+			@ModelAttribute(value = "depoimentos") Depoimento depoimento,
 			RedirectAttributes redirect, Model model) {
 		chamaPostsDoBanco(model);
-		dao.salvaBlogPost(blog);
-		return "redirect:/blog";
+
+		dao.salvaDepoimento(depoimento);
+		return "redirect:/depoimento";
 	}
-	
+
 	private void chamaPostsDoBanco(Model model) {
-		BlogPost blogPost = new BlogPost();
-		model.addAttribute(blogPost);
-		List<BlogPost> mensagens = dao.buscaMensagens();
+		Depoimento depoimento = new Depoimento();
+		model.addAttribute(depoimento);
+		List<Depoimento> mensagens = dao.buscaMensagens();
 		model.addAttribute("lista", mensagens);
 	}
 

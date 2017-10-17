@@ -20,7 +20,6 @@
 						<div class="col-lg-12">
 							<form id="login-form" action="${s:mvcUrl('UC#login').build()}"
 								method="get" role="form" style="display: block;">
-								<form:errors path="email" style="color:red;font-weight:bold"/>
 								<div class="form-group">
 									<input type="text" name="email" id="email" tabindex="1"
 										class="form-control" placeholder="E-mail" value="" required="required">
@@ -41,7 +40,7 @@
 							</form>
 							<form:form id="register-form"
 								action="${s:mvcUrl('UC#registrar').build()}" method="post"
-								role="form" style="display: none;" commandName="usuario"
+								role="form" style="display: none;" commandName="usuarioRegistro"
 								enctype="multipart/form-data">
 								<div class="form-group">
 									<input type="text" name="nome" id="nome" tabindex="1"

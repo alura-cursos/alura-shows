@@ -7,22 +7,22 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 
-import br.com.alura.owasp.model.BlogPost;
+import br.com.alura.owasp.model.Depoimento;
 
 @Repository
-public class BlogDaoImpl implements BlogDao {
+public class DepoimentoDaoImpl implements DepoimentoDao {
 
 	@PersistenceContext
 	private EntityManager manager;
 
 	@Override
-	public void salvaBlogPost(BlogPost post) {
+	public void salvaDepoimento(Depoimento post) {
 		manager.persist(post);
 	}
 
 	@Override
-	public List<BlogPost> buscaMensagens() {
-		return manager.createQuery("select b from BlogPost b", BlogPost.class)
+	public List<Depoimento> buscaMensagens() {
+		return manager.createQuery("select d from Depoimento d", Depoimento.class)
 				.getResultList();
 	}
 

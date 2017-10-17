@@ -1,8 +1,8 @@
 <%@include file="/WEB-INF/views/cabecalho.jsp"%>
 <div class="container formulario-cadastro-usuario">
-	<h1>Blog</h1>
-	<form:form action="${s:mvcUrl('BC#enviaMensagem').build()}"
-		commandName="blog" method="post">
+	<h1>Depoimentos</h1>
+	<form:form action="${s:mvcUrl('DC#enviaMensagem').build()}"
+		commandName="depoimentos" method="post">
 		<div class="form-group">
 			<label for="titulo">Título:</label> 
 			<input type="text"
@@ -11,7 +11,7 @@
 		<div class="form-group">
 			<label for="textarea">Mensagem:</label>
 			<textarea class="form-control" id="textarea" name="mensagem"
-				placeholder="Mensagem para o blog" rows="8" required="required"></textarea>
+				placeholder="Depoimento" rows="8" required="required"></textarea>
 		</div>
 
 		<button type="submit" class="btn btn-success pull-right">Enviar</button>
@@ -27,10 +27,10 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="blog" items="${lista}">
+				<c:forEach var="depoimento" items="${lista}">
 					<tr>
-						<td>${blog.titulo}</td>
-						<td>${blog.mensagem}</td>
+						<td>${depoimento.titulo}</td>
+						<td>${depoimento.mensagem}</td>
 					</tr>
 				</c:forEach>
 			</tbody>

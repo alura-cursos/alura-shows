@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -40,29 +39,33 @@ public class UsuarioController {
 	}
 
 	@RequestMapping(value = "/registrar", method = RequestMethod.POST)
-	public String registrar(@ModelAttribute("usuario") Usuario usuario,
-			BindingResult result, RedirectAttributes redirect,
+	public String registrar(@ModelAttribute("usuarioRegistro") Usuario usuarioRegistro,
+			RedirectAttributes redirect,
 			HttpServletRequest request, Model model, HttpSession session) {
-		chamaLogicaParaTratarImagem(usuario, request);
-		usuario.getRoles().add(new Role("ROLE_USER"));
-		dao.salva(usuario);
-		model.addAttribute("usuario", usuario);
-		session.setAttribute("usuario", usuario);
+
+		tratarImagem(usuarioRegistro, request);
+		usuarioRegistro.getRoles().add(new Role("ROLE_USER"));
+
+		dao.salva(usuarioRegistro);
+		session.setAttribute("usuario", usuarioRegistro);
+		model.addAttribute("usuario", usuarioRegistro);
 		return "usuarioLogado";
 	}
 
 	@RequestMapping("/login")
 	public String login(@ModelAttribute("usuario") Usuario usuario,
 			RedirectAttributes redirect, Model model, HttpSession session) {
+
 		Usuario usuarioRetornado = dao.procuraUsuario(usuario);
 		model.addAttribute("usuario", usuarioRetornado);
 		if (usuarioRetornado == null) {
-			redirect.addFlashAttribute("mensagem", "Usu√°rio n√£o encontrado!");
+			redirect.addFlashAttribute("mensagem", "Usu·rio n„o encontrado");
 			return "redirect:/usuario";
-		} else {
-			session.setAttribute("usuario", usuarioRetornado);
-			return "usuarioLogado";
 		}
+		
+		session.setAttribute("usuario", usuarioRetornado);
+		return "usuarioLogado";
+
 	}
 
 	@RequestMapping("/logout")
@@ -71,13 +74,12 @@ public class UsuarioController {
 		return "usuario";
 	}
 
-	private void chamaLogicaParaTratarImagem(Usuario usuario,
-			HttpServletRequest request) {
+	private void tratarImagem(Usuario usuario, HttpServletRequest request) {
 		usuario.setNomeImagem(usuario.getImagem().getOriginalFilename());
-		File arquivoDeImagem = new File(request.getServletContext()
-				.getRealPath("/image"), usuario.getNomeImagem());
+		File arquivo = new File(request.getServletContext().getRealPath(
+				"/image"), usuario.getNomeImagem());
 		try {
-			usuario.getImagem().transferTo(arquivoDeImagem);
+			usuario.getImagem().transferTo(arquivo);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}

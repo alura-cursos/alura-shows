@@ -37,7 +37,7 @@
 						<c:if test="${not empty usuario.email}">
 							<li><a href='<c:url value="/usuarioLogado"/>' /><strong>Perfil</strong></a></li>
 						</c:if>
-						<li><a href='<c:url value="/blog"/>' /><strong>Blog</strong></a></li>
+						<li><a href='<c:url value="/depoimento"/>' /><strong>Depoimentos</strong></a></li>
 					</ul>
 				</div>
 			</div>
