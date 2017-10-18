@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.alura.owasp.dao.UsuarioDao;
@@ -39,11 +40,12 @@ public class UsuarioController {
 	}
 
 	@RequestMapping(value = "/registrar", method = RequestMethod.POST)
-	public String registrar(@ModelAttribute("usuarioRegistro") Usuario usuarioRegistro,
-			RedirectAttributes redirect,
-			HttpServletRequest request, Model model, HttpSession session) {
+	public String registrar(MultipartFile imagem,
+			@ModelAttribute("usuarioRegistro") Usuario usuarioRegistro,
+			RedirectAttributes redirect, HttpServletRequest request,
+			Model model, HttpSession session) throws IllegalStateException, IOException {
 
-		tratarImagem(usuarioRegistro, request);
+		tratarImagem(imagem, usuarioRegistro, request);
 		usuarioRegistro.getRoles().add(new Role("ROLE_USER"));
 
 		dao.salva(usuarioRegistro);
@@ -62,7 +64,7 @@ public class UsuarioController {
 			redirect.addFlashAttribute("mensagem", "Usuário não encontrado");
 			return "redirect:/usuario";
 		}
-		
+
 		session.setAttribute("usuario", usuarioRetornado);
 		return "usuarioLogado";
 
@@ -74,14 +76,12 @@ public class UsuarioController {
 		return "usuario";
 	}
 
-	private void tratarImagem(Usuario usuario, HttpServletRequest request) {
-		usuario.setNomeImagem(usuario.getImagem().getOriginalFilename());
+	private void tratarImagem(MultipartFile imagem, Usuario usuario,
+			HttpServletRequest request) throws IllegalStateException, IOException {
+		usuario.setNomeImagem(imagem.getOriginalFilename());
 		File arquivo = new File(request.getServletContext().getRealPath(
 				"/image"), usuario.getNomeImagem());
-		try {
-			usuario.getImagem().transferTo(arquivo);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
+		imagem.transferTo(arquivo);
+
 	}
 }
