@@ -54,7 +54,7 @@ public class UsuarioController {
 		return "usuarioLogado";
 	}
 
-	@RequestMapping("/login")
+	@RequestMapping(value="/login",method=RequestMethod.POST)
 	public String login(@ModelAttribute("usuario") Usuario usuario,
 			RedirectAttributes redirect, Model model, HttpSession session) {
 
