@@ -28,10 +28,25 @@ public class UsuarioDaoImpl implements UsuarioDao {
 
 	public Usuario procuraUsuario(Usuario usuario) {
 		TypedQuery<Usuario> query = manager
-				.createQuery("select u from Usuario u where u.email=:email and u.senha=:senha ", Usuario.class);
+				.createQuery("select u from Usuario u where u.email=:email", Usuario.class);
 		query.setParameter("email", usuario.getEmail());
-		query.setParameter("senha", usuario.getSenha());
 		Usuario usuarioRetornado = query.getResultList().stream().findFirst().orElse(null);
-		return usuarioRetornado;
+		
+		if(validaASenhaDoUsuarioComOHashDoBanco(usuario,usuarioRetornado)) {
+			return usuarioRetornado;			
+		}
+		
+		return null;
+	}
+
+	private boolean validaASenhaDoUsuarioComOHashDoBanco(Usuario usuario, Usuario usuarioRetornado) {
+		
+		if(usuarioRetornado==null) {
+			return false;
+		}
+		
+		return BCrypt.checkpw(usuario.getSenha(), usuarioRetornado.getSenha());
+		
+		
 	}
 }
