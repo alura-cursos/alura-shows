@@ -27,6 +27,9 @@ public class UsuarioController {
 
 	@Autowired
 	private UsuarioDao dao;
+	
+	@Autowired
+	private GoogleWebClient cliente;
 
 	@RequestMapping("/usuario")
 	public String usuario(Model model) {
@@ -61,8 +64,18 @@ public class UsuarioController {
 		
 		String recaptcha = request.getParameter("g-recaptcha-response");
 		
-		new GoogleWebClient().verifica(recaptcha);
+		boolean verificaRecaptcha = cliente.verifica(recaptcha);
 		
+		if(verificaRecaptcha) {
+			return procuraUsuario(usuario, redirect, model, session);			
+		}
+		
+		redirect.addFlashAttribute("mensagem", "Por favor, comprove que você é humano!");
+		return "redirect:/usuario";
+
+	}
+
+	private String procuraUsuario(Usuario usuario, RedirectAttributes redirect, Model model, HttpSession session) {
 		Usuario usuarioRetornado = dao.procuraUsuario(usuario);
 		model.addAttribute("usuario", usuarioRetornado);
 		if (usuarioRetornado == null) {
@@ -72,7 +85,6 @@ public class UsuarioController {
 
 		session.setAttribute("usuario", usuarioRetornado);
 		return "usuarioLogado";
-
 	}
 
 	@RequestMapping("/logout")

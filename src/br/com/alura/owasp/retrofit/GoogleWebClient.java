@@ -2,8 +2,11 @@ package br.com.alura.owasp.retrofit;
 
 import java.io.IOException;
 
+import org.springframework.stereotype.Component;
+
 import retrofit2.Call;
 
+@Component
 public class GoogleWebClient {
 	
 	private static final String SECRET = "6LddPTUUAAAAAOkAx05jP2N9rIPlhf3WQHMuHMjZ";
