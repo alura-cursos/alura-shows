@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitInicializador {
 	
-	private static final String BASE_URL = "http://www.google.com/recaptcha/api/";
+	private static final String BASE_URL = "https://www.google.com/recaptcha/api/";
 	private Retrofit retrofit;
 
 	public RetrofitInicializador() {
