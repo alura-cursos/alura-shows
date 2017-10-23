@@ -56,8 +56,11 @@ public class UsuarioController {
 
 	@RequestMapping(value="/login",method=RequestMethod.POST)
 	public String login(@ModelAttribute("usuario") Usuario usuario,
-			RedirectAttributes redirect, Model model, HttpSession session) {
+			RedirectAttributes redirect, Model model, HttpSession session, HttpServletRequest request) {
 				
+		String recaptcha = request.getParameter("g-recaptcha-response");
+		
+		
 		Usuario usuarioRetornado = dao.procuraUsuario(usuario);
 		model.addAttribute("usuario", usuarioRetornado);
 		if (usuarioRetornado == null) {
