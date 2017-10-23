@@ -7,5 +7,5 @@ import retrofit2.http.Query;
 public interface GoogleService {
 
 	@POST("siteverify")
-	Call<String> enviaToken(@Query("secret") String secret, @Query("response") String response);
+	Call<Resposta> enviaToken(@Query("secret") String secret, @Query("response") String response);
 }
