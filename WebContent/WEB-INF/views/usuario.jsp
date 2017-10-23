@@ -11,23 +11,29 @@
 						<div class="col-xs-6">
 							<a href="#" id="register-form-link">Registrar</a>
 						</div>
-					</div>					
+					</div>
 					<hr>
 				</div>
 				<div class="panel-body">
-				<p class="pull-left" style="color:red; font-weight: bold">${mensagem}</p>
+					<p class="pull-left" style="color: red; font-weight: bold">${mensagem}</p>
 					<div class="row">
 						<div class="col-lg-12">
 							<form id="login-form" action="${s:mvcUrl('UC#login').build()}"
 								method="post" role="form" style="display: block;">
 								<div class="form-group">
 									<input type="text" name="email" id="email" tabindex="1"
-										class="form-control" placeholder="E-mail" value="" required="required">
+										class="form-control" placeholder="E-mail" value=""
+										required="required">
 								</div>
 								<div class="form-group">
 									<input type="password" name="senha" id="senha" tabindex="2"
 										class="form-control" placeholder="Senha" required="required">
 								</div>
+
+								<div class="g-recaptcha"
+									data-sitekey="6LddPTUUAAAAAAfibLDLxpz7iQC5AknyHrs-T-Al"></div>
+
+
 								<div class="form-group" style="margin-top: 3%">
 									<div class="row">
 										<div class="col-sm-6 col-sm-offset-3">
