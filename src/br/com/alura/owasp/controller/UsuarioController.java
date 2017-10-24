@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.com.alura.owasp.dao.UsuarioDao;
 import br.com.alura.owasp.model.Role;
 import br.com.alura.owasp.model.Usuario;
+import br.com.alura.owasp.model.UsuarioDTO;
 import br.com.alura.owasp.retrofit.GoogleWebClient;
 
 @Controller
@@ -45,9 +46,11 @@ public class UsuarioController {
 
 	@RequestMapping(value = "/registrar", method = RequestMethod.POST)
 	public String registrar(MultipartFile imagem,
-			@ModelAttribute("usuarioRegistro") Usuario usuarioRegistro,
+			@ModelAttribute("usuarioRegistro") UsuarioDTO usuarioDTO,
 			RedirectAttributes redirect, HttpServletRequest request,
 			Model model, HttpSession session) throws IllegalStateException, IOException {
+		
+		Usuario usuarioRegistro = usuarioDTO.montaUsuario();
 
 		tratarImagem(imagem, usuarioRegistro, request);
 		usuarioRegistro.getRoles().add(new Role("ROLE_USER"));
