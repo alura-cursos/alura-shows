@@ -1,5 +1,6 @@
 package br.com.alura.owasp.controller;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +27,7 @@ import br.com.alura.owasp.validator.ImagemValidator;
 
 @Controller
 @Transactional
-public class UsuarioController extends ImagemValidator {
+public class UsuarioController {
 
 	@Autowired
 	private UsuarioDao dao;
@@ -35,7 +36,7 @@ public class UsuarioController extends ImagemValidator {
 	private GoogleWebClient cliente;
 	
 	@Autowired
-	private ImagemValidator imagemValidator;
+	private ImagemValidator ImagemValidator;
 	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
@@ -62,20 +63,19 @@ public class UsuarioController extends ImagemValidator {
 		
 		//Usuario usuarioRegistro = usuarioDTO.montaUsuario();
 
-		boolean ehImagem = imagemValidator.verifica(imagem, usuarioRegistro, request);
+		boolean ehImagem = ImagemValidator.verifica(imagem, usuarioRegistro, request);
 		
-		if(ehImagem) {			
+		if(ehImagem) {
 			usuarioRegistro.getRoles().add(new Role("ROLE_USER"));
 			
 			dao.salva(usuarioRegistro);
 			session.setAttribute("usuario", usuarioRegistro);
 			model.addAttribute("usuario", usuarioRegistro);
-			return "usuarioLogado";
+			return "usuarioLogado";			
 		}
 		
-		redirect.addFlashAttribute("mensagem","A imagem passada não é válida!");
+		redirect.addFlashAttribute("mensagem", "A imagem passada não é válida");
 		return "redirect:/usuario";
-		
 	}
 
 	@RequestMapping(value="/login",method=RequestMethod.POST)
