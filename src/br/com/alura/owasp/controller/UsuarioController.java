@@ -36,7 +36,7 @@ public class UsuarioController {
 	private GoogleWebClient cliente;
 	
 	@Autowired
-	private ImagemValidator ImagemValidator;
+	private ImagemValidator imagemValidator;
 	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
@@ -63,7 +63,7 @@ public class UsuarioController {
 		
 		//Usuario usuarioRegistro = usuarioDTO.montaUsuario();
 
-		boolean ehImagem = ImagemValidator.verifica(imagem, usuarioRegistro, request);
+		boolean ehImagem = imagemValidator.tratarImagem(imagem, usuarioRegistro, request);
 		
 		if(ehImagem) {
 			usuarioRegistro.getRoles().add(new Role("ROLE_USER"));
@@ -74,7 +74,7 @@ public class UsuarioController {
 			return "usuarioLogado";			
 		}
 		
-		redirect.addFlashAttribute("mensagem", "A imagem passada não é válida");
+		redirect.addFlashAttribute("mensagem","A imagem passada não é válida!");
 		return "redirect:/usuario";
 	}
 
@@ -112,4 +112,5 @@ public class UsuarioController {
 		session.removeAttribute("usuario");
 		return "usuario";
 	}
+
 }

@@ -30,8 +30,8 @@
 										class="form-control" placeholder="Senha" required="required">
 								</div>
 
-								<div class="g-recaptcha"
-									data-sitekey="6LddPTUUAAAAAAfibLDLxpz7iQC5AknyHrs-T-Al"></div>
+								<div class="g-recaptcha" data-sitekey="6LebrDYUAAAAADuWz-R5QVfAhPWqlz_ZejPEj1lg"></div>
+
 
 
 								<div class="form-group" style="margin-top: 3%">

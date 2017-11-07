@@ -14,9 +14,8 @@ import br.com.alura.owasp.model.Usuario;
 
 @Component
 public class ImagemValidator {
-	
-	
-	public boolean verifica(MultipartFile imagem, Usuario usuario,
+
+	public boolean tratarImagem(MultipartFile imagem, Usuario usuario,
 			HttpServletRequest request) throws IllegalStateException, IOException {
 		
 		ByteArrayInputStream bytesImagem = new ByteArrayInputStream(imagem.getBytes());
@@ -24,7 +23,7 @@ public class ImagemValidator {
 		if(mime==null) {
 			return false;
 		}
-				
+		
 		usuario.setNomeImagem(imagem.getOriginalFilename());
 		File arquivo = new File(request.getServletContext().getRealPath(
 				"/image"), usuario.getNomeImagem());
