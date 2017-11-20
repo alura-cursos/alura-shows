@@ -30,7 +30,7 @@
 										class="form-control" placeholder="Senha" required="required">
 								</div>
 
-								<div class="g-recaptcha" data-sitekey="6LebrDYUAAAAADuWz-R5QVfAhPWqlz_ZejPEj1lg"></div>
+								<div class="g-recaptcha" data-sitekey="[Sua chave aqui]"></div>
 
 
 

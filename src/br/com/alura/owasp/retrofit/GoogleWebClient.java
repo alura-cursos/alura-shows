@@ -9,7 +9,7 @@ import retrofit2.Call;
 @Component
 public class GoogleWebClient {
 	
-	private static final String SECRET = "6LddPTUUAAAAAOkAx05jP2N9rIPlhf3WQHMuHMjZ";
+	private static final String SECRET = "[Seu segredo aqui]";
 
 	public boolean verifica(String recaptcha) throws IOException {
 		
